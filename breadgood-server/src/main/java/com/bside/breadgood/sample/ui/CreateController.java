@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class CreateController implements RecruitCreateApi {
     @Override
     public ResponseEntity<RecruitModel> createRecruit(RecruitCreateModel body) {
-
+        // 주석을 살포시 추가.
         RecruitModel model = new RecruitModel();
         if (body.getDeadlineDate().isBefore(LocalDateTime.now())) {
             return new ResponseEntity<>(model, HttpStatus.BAD_REQUEST);
