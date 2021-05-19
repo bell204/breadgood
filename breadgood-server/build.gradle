@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id "org.springframework.boot" version "2.2.2.RELEASE"
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id "io.freefair.lombok" version "5.0.0"
+    id 'java-library'
+    id 'org.hidetake.swagger.generator' version '2.18.2'
+}
+
+group = 'com.bside.breadgood'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+//    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+
+    swaggerCodegen 'io.swagger:swagger-codegen-cli:2.4.1'
+    implementation 'io.swagger:swagger-annotations:1.5.22'
+}
+
+swaggerSources {
+    petstore {
+        inputFile = file('codegen/petstore.yaml')
+        code {
+            language = 'spring'
+            configFile = file('codegen/config.json')
+            outputDir = file("$projectDir/src/main/generated")
+            wipeOutputDir = false
+        }
+    }
+}
+
+compileJava.dependsOn swaggerSources.petstore.code
+sourceSets.main.java.srcDir "${swaggerSources.petstore.code.outputDir}/src/main/java"
+sourceSets.main.resources.srcDir "${swaggerSources.petstore.code.outputDir}/src/main/resources"
+
+test {
+    useJUnitPlatform()
+}
