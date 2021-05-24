@@ -6,7 +6,7 @@
   "modelPackage": "com.bside.breadgood.apifirstdesign.models",
   "apiPackage": "com.bside.breadgood.apifirstdesign.apis",
 
-  "java8": true,
+  "java11": true,
   "useTags": true,
   "useBeanValidation": true,
   "interfaceOnly": true,
