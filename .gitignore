@@ -6,7 +6,7 @@ breadgood-server/build/
 breadgood-server/!gradle/wrapper/gradle-wrapper.jar
 breadgood-server/!**/src/main/**/build/
 breadgood-server/!**/src/test/**/build/
-breadgood-server/docker/mariadb/data/*
+breadgood-server/docker/mariadb/data/**
 
 
 ### STS ###

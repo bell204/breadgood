@@ -1,25 +1,22 @@
 version: "3.2"
 services:
-  database:
+  mariadb:
     container_name: breadgood_mariadb
     image: mariadb:10.5.10
+    restart: always
     volumes:
-      - ~/docker/mariadb/etc/mysql/conf.d:/etc/mysql/conf.d:ro
-      - ~/docker/mariadb/var/lib/mysql:/var/lib/mysql
-      - ~/docker/mariadb/var/log/maria:/var/log/maria
-    environment:
-      - MARIA_USER=root
-      - MARIADB_ROOT_PASSWORD=1234
-      - MARIA_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_ROOT_HOST=%
-      - MARIA_DATABASE=breadgood
-    command: [ '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
+      #      - ~/docker/mariadb/etc/mysql/conf.d:/etc/mysql/conf.d:ro
+      - ./docker/mariadb/conf.d:/etc/mysql/conf.d
+      - ./docker/mariadb/data:/var/lib/mysql
+#      - ./docker/mariadb/log:/var/log/maria
+      - ./docker/mariadb/initdb.d:/docker-entrypoint-initdb.d
+    env_file: ./docker/mariadb/.env
     ports:
-      - 3306:3306
+      - 3377:3306
     networks:
       - database-network
 
-  backend-server:
+  springboot:
     build:
       context: .
       dockerfile: Dockerfile
@@ -29,9 +26,9 @@ services:
     container_name: breadgood_server
     restart: always
     depends_on:
-      - database
+      - mariadb
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://breadgood_mariadb:3306/breadgood?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3377/breadgood?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
     networks:
@@ -39,14 +36,3 @@ services:
 
 networks:
   database-network:
-
-#  application:
-#    build: docker
-#    environment:
-#      SPRING_DATASOURCE_URL: jdbc:mariadb://database:3306/database_name?useUnicode=true
-#      SPRING_DATASOURCE_USERNAME: root
-#      SPRING_DATASOURCE_PASSWORD:
-#    ports:
-#      - 8080:8080
-#    depends_on:
-#      - database
