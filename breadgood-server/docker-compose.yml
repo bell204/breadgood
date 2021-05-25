@@ -1,0 +1,38 @@
+version: "3.2"
+services:
+  mariadb:
+    container_name: breadgood_mariadb
+    image: mariadb:10.5.10
+    restart: always
+    volumes:
+      #      - ~/docker/mariadb/etc/mysql/conf.d:/etc/mysql/conf.d:ro
+      - ./docker/mariadb/conf.d:/etc/mysql/conf.d
+      - ./docker/mariadb/data:/var/lib/mysql
+#      - ./docker/mariadb/log:/var/log/maria
+      - ./docker/mariadb/initdb.d:/docker-entrypoint-initdb.d
+    env_file: ./docker/mariadb/.env
+    ports:
+      - 3377:3306
+    networks:
+      - database-network
+
+  springboot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: breadgood_server
+    ports:
+      - "8080:8080"
+    container_name: breadgood_server
+    restart: always
+    depends_on:
+      - mariadb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3377/breadgood?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+    networks:
+      - database-network
+
+networks:
+  database-network:

@@ -33,6 +33,12 @@ dependencies {
 
     swaggerCodegen 'io.swagger:swagger-codegen-cli:2.4.1'
     implementation 'io.swagger:swagger-annotations:1.5.22'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+
+
 }
 
 swaggerSources {
@@ -54,3 +60,21 @@ sourceSets.main.resources.srcDir "${swaggerSources.petstore.code.outputDir}/src/
 test {
     useJUnitPlatform()
 }
+
+//task dockerComposeUp(type: Exec) {
+//    group = 'mysql'
+//    commandLine "docker-compose", "-f", "docker/mariadb.yml", "up", "-d"
+//}
+//
+//task dockerComposeDown(type: Exec) {
+//    group = 'mysql'
+//    commandLine "docker-compose", "-f", "docker/mariadb.yml", "down"
+//}
+
+//if (System.env['BOOTSTRAP_DOCKER'] == null) {
+//    bootRun.dependsOn dockerComposeUp
+//    bootRun.finalizedBy dockerComposeDown
+
+//    test.dependsOn dockerComposeUp
+//    test.finalizedBy dockerComposeDown
+//}
