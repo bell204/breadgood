@@ -11,7 +11,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +20,20 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+
     - name: Grant execute permission for gradlew
       run: chmod +x ./breadgood-server/gradlew
+
     - name: Build with Gradle
       run: ./breadgood-server/gradlew build
+
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        context: ./breadgood-server
+        push: true
+        tags: breadgood/app:latest
+        image: breadgood/dockerhub
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
