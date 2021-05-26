@@ -20,7 +20,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: breadgood_server
+    image: breadgood/dockerhub
     ports:
       - "8080:8080"
     container_name: breadgood_server
