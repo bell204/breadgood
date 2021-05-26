@@ -32,14 +32,8 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build docker-compose
-      run: |
-        echo Build started on `date`
-        echo Building the Docker image...
-        docker-compose -f ./breadgood-server/docker-compose.yml build
+      run: docker-compose -f ./breadgood-server/docker-compose.yml build
 
     - name: push docker image
-      run: |
-        echo Build completed on `date`
-        eecho Pushing the Docker image...
-        docker-compose -f ./breadgood-server/docker-compose.yml push
+      run: docker-compose -f ./breadgood-server/docker-compose.yml push
 
