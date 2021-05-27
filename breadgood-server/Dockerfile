@@ -4,7 +4,7 @@
 FROM adoptopenjdk/openjdk11:alpine-jre
 #WORKDIR app
 #VOLUME /tmp
-ARG JAR_FILE=./build/libs/*.jar
+ARG JAR_FILE=./breadgood-server/build/libs/*.jar
 COPY ${JAR_FILE} app.jar
 #ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 ENTRYPOINT ["java","-jar","/app.jar"]
