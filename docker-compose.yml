@@ -18,7 +18,7 @@ services:
 
   springboot:
     build:
-      context: .
+      context: ./breadgood-server
       dockerfile: Dockerfile
     image: breadgood/dockerhub
     ports:
