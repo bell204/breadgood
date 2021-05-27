@@ -3,10 +3,10 @@ package com.bside.breadgood;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class BreadgoodServerApplicationTests {
 
-    @Test
+//    @Test
     void contextLoads() {
     }
 
