@@ -23,7 +23,9 @@ jobs:
       run: chmod +x ./breadgood-server/gradlew
 
     - name: Build with Gradle
-      run: ./breadgood-server/gradlew build
+      run: gradlew build
+      env:
+        working-directory: ./breadgood-server
 
     - name: Grant execute permission for scripts
       run: chmod +x ./scripts
