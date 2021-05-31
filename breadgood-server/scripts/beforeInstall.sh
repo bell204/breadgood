@@ -12,8 +12,8 @@ docker rm [Your Docker Container Name]
 # 이후 afterinstall.bash 파일에서 새롭게 받아온 파일을 사용하여 다시 Docker Container를 띄울 예정입니다.
 # [Your Docker Container Name] 예시) woomin-facebook-codedeploy
 
-if [[ "$(docker images -q [Your DockerHub ID]/[Your Repository Name]:[Your version] 2> /dev/null)" != "" ]]; then
-docker rmi -f $(docker images --format '{{.Repository}}:{{.Tag}}' --filter=reference='[Your DockerHub ID]/[Your Repository Name]:[Your version]')
+if [[ "$(docker images -q bell2017/bell2017/dockerhub:latest 2> /dev/null)" != "" ]]; then
+docker rmi -f $(docker images --format '{{.Repository}}:{{.Tag}}' --filter=reference='bell2017/bell2017/dockerhub:latest')
 fi
 # 해당 Docker Image가 존재하면 image를 제거한다는 뜻입니다.
 # 이후 afterinstall.bash 파일에서 갱신된 이미지를 불러올 것입니다.
