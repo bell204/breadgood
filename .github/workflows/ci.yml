@@ -45,7 +45,8 @@ jobs:
       run: docker-compose -f docker-compose.yml push
       
     - name: Trigger the CodeDeploy in EC2 instance
-      run: aws deploy --region ap-northeast-2 create-deployment --application-name breadgood-test --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name breadgood-test --github-location repository=bell204/breadgood,commitId=8f1fae74afa02296c28647db719be90795f44c71
+      run: aws deploy --region ap-northeast-2 create-deployment --application-name breadgood-test --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name breadgood-test 
+      --docker hub location
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
