@@ -26,7 +26,7 @@ public class HomeController {
             session.setAttribute("access_token", accessToken);
         }
         mav.addObject("userId", userInfo.get("nickname"));
-        mav.setViewName("index");
+        mav.setViewName("signup");
 
         return mav;
     }
