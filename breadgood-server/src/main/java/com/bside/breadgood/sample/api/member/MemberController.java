@@ -1,16 +1,23 @@
 package com.bside.breadgood.sample.api.member;
 
-import com.bside.breadgood.sample.domain.member.MemberDto;
-import com.bside.breadgood.sample.domain.member.MemberService;
 import lombok.AllArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
+
 @Controller
 @AllArgsConstructor
+@Log
 public class MemberController {
-    private MemberService memberService;
+
+    @GetMapping("/user")
+    public String user(Principal principal){
+        log.info("user name :: "+principal.getName());
+        return "/user";
+    }
 
     // 메인 페이지
     @GetMapping("/")
@@ -22,14 +29,6 @@ public class MemberController {
     @GetMapping("/user/signup")
     public String dispSignup() {
         return "/signup";
-    }
-
-    // 회원가입 처리
-    @PostMapping("/user/signup")
-    public String execSignup(MemberDto memberDto) {
-        memberService.joinUser(memberDto);
-
-        return "redirect:/user/login";
     }
 
     // 로그인 페이지

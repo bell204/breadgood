@@ -1,4 +1,4 @@
-package com.bside.breadgood.sample.api;
+package com.bside.breadgood.sample.api.member;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -1,21 +1,16 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <title>홈</title>
+    <link rel="stylesheet" type="text/css" href="/css/buttons-si.css"/>
 </head>
 <body>
-    <h1>카카오 로그인 테스트</h1>
-    <span th:if="${userId == null}">
-        <a href="https://kauth.kakao.com/oauth/authorize?client_id=9fff25df61e7035600233890ac05dcf5&redirect_uri=http://localhost:8080/login&response_type=code ">
-            <img src="img/kakao_login_medium_narrow.png">
-        </a>
-    </span>
-
-    <span th:if="${userId == null}">
-        <form name="logout" action="http://localhost:8080/logout">
-            <input type="submit" value="로그아웃">
-        </form>
-    </span>
+<div align="center">
+    <h1>OAuth2 로그인</h1>
+    <button onclick="location.href='/oauth2/authorization/kakao'"><img src="/img/kakao_login_medium_narrow.png"></button>
+    <br/>
+    <a href="/user">로그인한 사람만 볼 수 있는 곳</a>
+</div>
 </body>
 </html>

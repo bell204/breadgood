@@ -1,4 +1,4 @@
-package com.bside.breadgood.sample.api;
+package com.bside.breadgood.sample.api.member;
 
 import com.google.gson.*;
 import org.apache.tomcat.util.json.JSONParser;
@@ -29,6 +29,8 @@ public class KakaoApi {
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=9fff25df61e7035600233890ac05dcf5");
             sb.append("&redirect_uri=http://localhost:8080/login");
+
+            System.out.println("code------------------"+code);
             sb.append("&code="+code);
 
             bw.write(sb.toString());

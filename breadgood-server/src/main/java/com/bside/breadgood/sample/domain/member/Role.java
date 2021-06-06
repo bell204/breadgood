@@ -1,13 +1,17 @@
 package com.bside.breadgood.sample.domain.member;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+/**
+ * 권한 enum
+ */
 @Getter
+@RequiredArgsConstructor
 public enum Role {
-    ADMIN("ROLE_ADMIN"),
-    MEMBER("ROLE_MEMBER");
+    USER("ROLE_USER", "일반 사용자"),
+    ADMIN("ROLE_ADMIN", "관리자");
 
-    private String value;
+    private final String key;
+    private final String title;
 }
